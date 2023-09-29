@@ -5,6 +5,8 @@ for (var i = 0; i < NumberOfDrumButtons; i++) {
     var buttonInnerHTML = this.innerHTML;
     mixsound(buttonInnerHTML);
 
+    buttonAnimation(buttonInnerHTML);
+
     // Add more cases for other buttonInnerHTML values if needed
     // case "a":
     //   var audio = new Audio("tom-2.mp3");
@@ -15,12 +17,11 @@ for (var i = 0; i < NumberOfDrumButtons; i++) {
   });
 }
 
-// if button us pressed it will make sound
-
 document.addEventListener("keypress", function (event) {
   /* alert("key was pressed!"); */
   /*  console.log(event); */
   mixsound(event.key);
+  buttonAnimation(event.key);
 });
 
 function mixsound(key) {
@@ -61,6 +62,16 @@ function mixsound(key) {
     default:
       console.log("Invalid buttonInnerHTML");
   }
+}
+
+function buttonAnimation(currentKey) {
+  var activeButton = document.querySelector("." + currentKey);
+
+  activeButton.classList.add("pressed");
+
+  setTimeout(function () {
+    activeButton.classList.remove("pressed");
+  }, 100);
 }
 
 /* var audio = new Audio("../src/mp/tom-1.mp3");
